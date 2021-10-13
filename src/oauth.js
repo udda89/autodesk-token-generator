@@ -46,7 +46,8 @@ exports.generateToken = async function(req, res) {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let credentials = await oAuth2TwoLegged.authenticate();
 		console.log("**** Got Credentials", credentials);
-        res.jsonp(credentials);
+        console.log("**** Got access token ", credentials.access_token);
+        res.jsonp(credentials.access_token);
 	} catch (ex) {
 		console.error('\x1b[31m Error:', ex, '\x1b[0m');
 	}

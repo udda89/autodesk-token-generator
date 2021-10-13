@@ -42,6 +42,8 @@ const oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(FORGE_CLIENT_ID, FORGE_
 
 exports.generateToken = async function(req, res) {
     try {
+        res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let credentials = await oAuth2TwoLegged.authenticate();
 		console.log("**** Got Credentials", credentials);
         res.send(credentials);

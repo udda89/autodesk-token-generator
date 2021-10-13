@@ -25,8 +25,8 @@
 const ForgeSDK = require('./../index');
 
 // TODO - insert your CLIENT_ID and CLIENT_SECRET
-const FORGE_CLIENT_ID = '';
-const FORGE_CLIENT_SECRET = '';
+const FORGE_CLIENT_ID = 'ySrXMvmJ9qMcwHbWXOvQG7EmFkGAsGpl';
+const FORGE_CLIENT_SECRET = '4O4eDVRQweSio5Ka';
 
 // Initialize the 2-legged oauth2 client
 const oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(FORGE_CLIENT_ID, FORGE_CLIENT_SECRET,
@@ -39,6 +39,16 @@ const oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(FORGE_CLIENT_ID, FORGE_
 // 	.catch (err => {
 // 		console.error('\x1b[31m Error:', err, '\x1b[0m');
 // 	});
+
+exports.generateToken = async function(req, res) {
+    try {
+		let credentials = await oAuth2TwoLegged.authenticate();
+		console.log("**** Got Credentials", credentials);
+        res.send(credentials);
+	} catch (ex) {
+		console.error('\x1b[31m Error:', ex, '\x1b[0m');
+	}
+};
 
 (async () => {
 	try {
